@@ -93,13 +93,27 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen items-center p-4 bg-background text-foreground">
-      <main className="flex-grow flex flex-col items-center justify-center text-center w-full">
+      <main className="flex-grow flex flex-col items-center justify-center text-center w-full px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
           Student Portal
         </h1>
-        <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">
           Maligayang pagdating! Sagutin ang tanong sa ibaba.
         </p>
+
+        <div className="text-center text-foreground/90 mb-10 max-w-xl mx-auto">
+          <p className="mb-2">Alam kong mahirap mag-aral</p>
+          <p className="mb-2">pero hindi lahat nabibigyan ng ganyang pagkakataon</p>
+          <br />
+          <p className="mb-2">Kung nahihirapan ka, dapat maging proud ka pa nga</p>
+          <p className="mb-2">dahil may mga taong takot maghirap at pinipiling mandaya</p>
+          <br />
+          <p className="mb-2">Anumang mangyari, matatapos din lahat ng paghihirap</p>
+          <br />
+          <p className="mb-2">At kahit na sabihin mong sa dulo ng bawat paghihirap ay may</p>
+          <p className="mb-2">kasunod pang mga paghihirap, anong magagawa natin? Hindi tayo</p>
+          <p className="mb-2">Diyos para mamili ng tadhana</p>
+        </div>
       </main>
 
       <div className="w-full max-w-md p-6 mt-auto mb-4 bg-card shadow-xl rounded-lg border border-border">
