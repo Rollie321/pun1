@@ -39,7 +39,7 @@ export default function Home() {
             <Input
               id="studentNameInput"
               type="text"
-              placeholder="Isulat ang iyong pangalan"
+              placeholder="Name"
               value={studentName}
               onChange={(e) => setStudentName(e.target.value)}
               className="w-full h-12 text-base"
@@ -51,7 +51,7 @@ export default function Home() {
             className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-lg transition-transform duration-300 ease-in-out transform hover:scale-105 group"
             size="lg"
           >
-            <Send className="mr-2 h-5 w-5" /> Send
+            <Send className="mr-2 h-5 w-5" /> Oo
           </Button>
         </div>
       </div>
