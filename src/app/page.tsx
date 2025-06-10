@@ -73,10 +73,7 @@ export default function Home() {
         });
       }
 
-      toast({
-        title: "Success!",
-        description: `Hello ${studentName}! Ang iyong pangalan ay naisave na sa listahan.`,
-      });
+      // Removed success toast
       setStudentName('');
       await fetchNamesList(); 
     } catch (e) {
@@ -143,7 +140,7 @@ export default function Home() {
             ) : (
               <Send className="mr-2 h-5 w-5" />
             )}
-            {isLoading ? "Nagpapadala..." : "Oo"}
+            Oo
           </Button>
         </div>
       </div>
@@ -174,7 +171,7 @@ export default function Home() {
           </AccordionItem>
         </Accordion>
       </div>
-      <div className="pb-10"></div> {/* Spacer at the bottom */}
+      <div className="pb-10"></div>
     </div>
   );
 }
