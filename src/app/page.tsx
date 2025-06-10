@@ -4,18 +4,48 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Send } from 'lucide-react'; // For the send button icon
+import { Send } from 'lucide-react';
+import { db } from '@/lib/firebase'; // Import db instance
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { useToast } from "@/hooks/use-toast";
 
 export default function Home() {
   const [studentName, setStudentName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSend = () => {
-    // Placeholder for future send logic
+  const handleSend = async () => {
     if (studentName.trim() === '') {
-      alert('Pakilagay ang iyong pangalan.');
+      toast({
+        title: "Error",
+        description: "Pakilagay ang iyong pangalan.",
+        variant: "destructive",
+      });
       return;
     }
-    alert(`Hello ${studentName}! Ang iyong tugon ay (hindi pa talaga) naipadala.`);
+
+    setIsLoading(true);
+    try {
+      const docRef = await addDoc(collection(db, "test"), {
+        name: studentName,
+        timestamp: serverTimestamp(), // Firestore server timestamp
+      });
+      console.log("Document written with ID: ", docRef.id);
+      toast({
+        title: "Success!",
+        description: `Hello ${studentName}! Ang iyong pangalan ay naisave na.`,
+      });
+      setStudentName(''); // Clear input after successful submission
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      toast({
+        title: "Error",
+        description: "Nagkaroon ng problema sa pag-save ng iyong pangalan. Pakisubukan muli.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -44,14 +74,24 @@ export default function Home() {
               onChange={(e) => setStudentName(e.target.value)}
               className="w-full h-12 text-base"
               aria-label="Student Name"
+              disabled={isLoading}
             />
           </div>
-          <Button 
-            onClick={handleSend} 
+          <Button
+            onClick={handleSend}
             className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-lg transition-transform duration-300 ease-in-out transform hover:scale-105 group"
             size="lg"
+            disabled={isLoading}
           >
-            <Send className="mr-2 h-5 w-5" /> Oo
+            {isLoading ? (
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            ) : (
+              <Send className="mr-2 h-5 w-5" />
+            )}
+            {isLoading ? "Nagpapadala..." : "Oo"}
           </Button>
         </div>
       </div>
