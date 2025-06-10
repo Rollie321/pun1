@@ -104,6 +104,9 @@ export default function Home() {
           <p className="mb-2">At kahit na sabihin mong sa dulo ng bawat paghihirap ay may</p>
           <p className="mb-2">kasunod pang mga paghihirap, anong magagawa natin? Hindi tayo</p>
           <p className="mb-2">Diyos para mamili ng tadhana</p>
+        
+          <br/><br/>
+          <p>-Angelo R.</p>
         </div>
       </main>
 
