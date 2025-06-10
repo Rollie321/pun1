@@ -94,12 +94,6 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col items-center p-4 bg-background text-foreground">
       <main className="flex-grow flex flex-col items-center justify-center text-center w-full px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-          Student Portal
-        </h1>
-        <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">
-          Maligayang pagdating! Sagutin ang tanong sa ibaba.
-        </p>
 
         <div className="text-center text-foreground/90 mb-10 max-w-xl mx-auto">
           <p className="mb-2">Alam kong mahirap mag-aral</p>
