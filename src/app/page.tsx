@@ -87,8 +87,8 @@ export default function Home() {
               value={studentName}
               onChange={(e) => setStudentName(e.target.value)}
               className="w-full h-12 text-base"
-              aria-label="Student Name"
               disabled={isLoading}
+              suppressHydrationWarning // Added to address fdprocessedid
             />
           </div>
           <Button
@@ -96,6 +96,7 @@ export default function Home() {
             className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-lg transition-transform duration-300 ease-in-out transform hover:scale-105 group"
             size="lg"
             disabled={isLoading}
+            suppressHydrationWarning // Added to address fdprocessedid
           >
             {isLoading ? (
               <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
