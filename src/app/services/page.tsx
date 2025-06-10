@@ -1,5 +1,4 @@
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Image from 'next/image';
 import { Code, Palette, Server, Smartphone } from 'lucide-react';
@@ -46,7 +45,6 @@ const services: Service[] = [
 export default function ServicesPage() {
   return (
     <>
-      <Header />
       <main className="flex-grow py-16 md:py-24">
         <div className="container max-w-screen-lg mx-auto px-4">
           <section className="text-center mb-16">
@@ -85,7 +83,6 @@ export default function ServicesPage() {
           </section>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

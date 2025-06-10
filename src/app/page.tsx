@@ -1,5 +1,4 @@
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
+
 import InteractiveDemo from '@/components/interactive-demo';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,7 +8,6 @@ import { CheckCircle, ArrowRight } from 'lucide-react';
 export default function Home() {
   return (
     <>
-      <Header />
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="py-16 md:py-24 bg-accent/30">
@@ -86,7 +84,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

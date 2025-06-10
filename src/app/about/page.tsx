@@ -1,5 +1,4 @@
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import { Users, Target, Eye } from 'lucide-react';
@@ -7,7 +6,6 @@ import { Users, Target, Eye } from 'lucide-react';
 export default function AboutPage() {
   return (
     <>
-      <Header />
       <main className="flex-grow py-16 md:py-24">
         <div className="container max-w-screen-lg mx-auto px-4">
           <section className="text-center mb-16">
@@ -75,7 +73,6 @@ export default function AboutPage() {
           </section>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
