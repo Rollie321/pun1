@@ -1,89 +1,60 @@
 
-import InteractiveDemo from '@/components/interactive-demo';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+"use client";
+
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Send } from 'lucide-react'; // For the send button icon
 
 export default function Home() {
+  const [studentName, setStudentName] = useState('');
+
+  const handleSend = () => {
+    // Placeholder for future send logic
+    if (studentName.trim() === '') {
+      alert('Pakilagay ang iyong pangalan.');
+      return;
+    }
+    alert(`Hello ${studentName}! Ang iyong tugon ay (hindi pa talaga) naipadala.`);
+  };
+
   return (
-    <>
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-accent/30">
-          <div className="container max-w-screen-lg mx-auto px-4 text-center">
-            <h1 className="font-headline text-4xl md:text-5xl font-bold mb-6 text-primary">
-              Welcome to Charot Lang!
-            </h1>
-            <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto">
-              Discover a new way to experience web applications. We blend simplicity with modern design to bring you an intuitive and delightful user experience.
-            </p>
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-transform duration-300 ease-in-out transform hover:scale-105 group">
-              Get Started <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-screen-lg mx-auto px-4">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center mb-12">
-              Our Core Features
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { title: "Responsive Design", description: "Seamless experience on any device, from mobile to desktop.", image: "https://placehold.co/600x400.png", hint:"responsive design" },
-                { title: "Interactive UI", description: "Engaging elements that respond to your actions.", image: "https://placehold.co/600x400.png", hint: "user interface" },
-                { title: "Modern Aesthetics", description: "Clean, beautiful, and professional look and feel.", image: "https://placehold.co/600x400.png", hint: "modern abstract" },
-              ].map((feature, index) => (
-                <Card key={index} className="shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                  <CardHeader>
-                    <Image 
-                      src={feature.image} 
-                      alt={feature.title} 
-                      width={600} 
-                      height={400} 
-                      className="rounded-t-lg mb-4 aspect-[3/2] object-cover"
-                      data-ai-hint={feature.hint}
-                    />
-                    <CardTitle className="font-headline text-primary">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{feature.description}</CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        {/* Interactive Demo Section */}
-        <section className="py-16 md:py-24 bg-secondary/30">
-          <div className="container max-w-screen-lg mx-auto px-4 flex flex-col items-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center mb-12">
-              Try Our Interactive Demo
-            </h2>
-            <InteractiveDemo />
-          </div>
-        </section>
-
-        {/* Call to Action Section */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-screen-lg mx-auto px-4 text-center">
-            <Card className="bg-primary/10 p-8 md:p-12 rounded-lg shadow-lg">
-              <h2 className="font-headline text-3xl md:text-4xl font-bold mb-6 text-primary">
-                Ready to Dive In?
-              </h2>
-              <p className="text-lg text-foreground/80 mb-8 max-w-xl mx-auto">
-                Join us and explore the possibilities. We are here to help you succeed.
-              </p>
-              <Button size="lg" variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-transform duration-300 ease-in-out transform hover:scale-105 group">
-                Learn More <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-            </Card>
-          </div>
-        </section>
+    <div className="flex flex-col min-h-screen items-center p-4 bg-background text-foreground">
+      <main className="flex-grow flex flex-col items-center justify-center text-center w-full">
+        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+          Student Portal
+        </h1>
+        <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
+          Maligayang pagdating! Sagutin ang tanong sa ibaba.
+        </p>
       </main>
-    </>
+
+      <div className="w-full max-w-md p-6 mt-auto bg-card shadow-xl rounded-lg border border-border">
+        <div className="space-y-6">
+          <p className="text-2xl font-semibold text-center text-primary">
+            Gusto mo bang pumasa?
+          </p>
+          <div className="space-y-2">
+             <label htmlFor="studentNameInput" className="text-sm font-medium text-foreground/90 sr-only">Iyong Pangalan</label>
+            <Input
+              id="studentNameInput"
+              type="text"
+              placeholder="Isulat ang iyong pangalan"
+              value={studentName}
+              onChange={(e) => setStudentName(e.target.value)}
+              className="w-full h-12 text-base"
+              aria-label="Student Name"
+            />
+          </div>
+          <Button 
+            onClick={handleSend} 
+            className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-lg transition-transform duration-300 ease-in-out transform hover:scale-105 group"
+            size="lg"
+          >
+            <Send className="mr-2 h-5 w-5" /> Send
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }
