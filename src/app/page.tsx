@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Send } from 'lucide-react';
 import { db } from '@/lib/firebase'; // Import db instance
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, serverTimestamp } from 'firebase/firestore';
 import { useToast } from "@/hooks/use-toast";
 
 export default function Home() {
@@ -25,19 +25,33 @@ export default function Home() {
     }
 
     setIsLoading(true);
+    const namesDocRef = doc(db, "test", "names");
+
     try {
-      const docRef = await addDoc(collection(db, "test"), {
-        name: studentName,
-        timestamp: serverTimestamp(), // Firestore server timestamp
-      });
-      console.log("Document written with ID: ", docRef.id);
+      const docSnap = await getDoc(namesDocRef);
+
+      if (docSnap.exists()) {
+        // Document exists, update the array
+        await updateDoc(namesDocRef, {
+          names: arrayUnion(studentName.trim()),
+          lastModified: serverTimestamp(),
+        });
+      } else {
+        // Document doesn't exist, create it
+        await setDoc(namesDocRef, {
+          names: [studentName.trim()],
+          createdAt: serverTimestamp(),
+          lastModified: serverTimestamp(),
+        });
+      }
+
       toast({
         title: "Success!",
-        description: `Hello ${studentName}! Ang iyong pangalan ay naisave na.`,
+        description: `Hello ${studentName}! Ang iyong pangalan ay naisave na sa listahan.`,
       });
       setStudentName(''); // Clear input after successful submission
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error("Error updating/creating document: ", e);
       toast({
         title: "Error",
         description: "Nagkaroon ng problema sa pag-save ng iyong pangalan. Pakisubukan muli.",
